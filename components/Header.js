@@ -4,7 +4,7 @@ import {
 import Link from 'next/link';
 
 
-const Header = () => {
+const Header = (props) => {
 	const [fade, setFade] = useState(false);
 	useEffect(() => {
 		window.addEventListener('resize', () => {
@@ -31,17 +31,19 @@ const Header = () => {
 	const handleOnMouseEnter = (e) => {
 		if (!("ontouchend" in document)) {
 			setFade(true);
-			console.log('handleOnMouseEnter');
 		}
 	}
 	const handleOnMouseLeave = () => {
 		if (!("ontouchend" in document)) {
 			setFade(false);
-			console.log('handleOnMouseLeave');
 		}
 	}
 	const handleToggle = (e) => {
-		setFade(!fade);
+		const {blur,setBlur}=props;
+		if (window.innerWidth < 500) {
+			setBlur(!blur);
+		}
+			setFade(!fade);
 	}
 	return (
 		<div className="mask" onMouseEnter={handleOnMouseEnter} onMouseLeave={handleOnMouseLeave}>
@@ -113,6 +115,40 @@ const Header = () => {
 					background: #333;
 					border-radius: 1px;
 				}
+
+				@media(max-width:500px){
+					.arrow.active{
+						top: 5px;
+						transform: translateY(0);
+						opacity: 1;
+						box-shadow: 0 0 3px rgba(0,0,0,0.3);
+					}
+
+					.arrow span{
+						transition: 0.3s background-color 0.3s;
+						background: #333;
+					}
+					.arrow span:after,
+					.arrow span:before{
+						transition:0.3s top 0.3s,0.3s bottom 0.3s,0.3s transform;
+					}
+					.arrow.active span:after,
+					.arrow.active span:before{
+						transition:0.3s top ,0.3s bottom,0.3s transform 0.3s;
+					}
+					.arrow.active span{
+						background: transparent;
+						transition: 0.3s background-color;
+					}
+					.arrow.active span:after{
+						top: 0;
+						transform: rotateZ(45deg);
+					}
+					.arrow.active span:before{
+						bottom:0;
+						transform: rotateZ(-45deg);
+					}
+				}
 				.mask{
 					position: fixed;
 					top: 0;
@@ -134,6 +170,11 @@ const Header = () => {
 					opacity: 0;
 					visibility: hidden;
 				}
+				@media(max-width:500px){
+					.nav{
+						height: auto;
+					}
+				}
 				.nav.active{
 					transform: translateY(0);
 					opacity: 1;
@@ -145,9 +186,12 @@ const Header = () => {
 					justify-content: space-between;
 					transition: 0.3s;
 				}
-				@media(max-width:1600px){
+				@media(max-width:500px){
 					.w1500{
-						width: 80%;
+						flex-direction:column;
+						width: 100%;
+						padding: 0 15px;
+						box-sizing: border-box;
 					}
 				}
 				.brand{
@@ -158,6 +202,11 @@ const Header = () => {
 					height: 100%;
 					padding: 0 10px;
 					line-height: 56px;
+				}
+				@media(max-width:500px){
+					.brand a{
+						display: inline-block;
+					}
 				}
 				.links{
 					display: flex;
@@ -171,6 +220,21 @@ const Header = () => {
 				}
 				.links a:hover{
 					color: #1890ff;
+				}
+				@media(max-width:500px){
+					.links{
+						overflow-x: scroll;
+						-webkit-overflow-scrolling: touch;
+						overflow-y: hidden;
+					}
+					.links::-webkit-scrollbar{
+						display: none;
+					}
+					.links a{
+						height: 50px;
+						line-height: 50px;
+						white-space: nowrap;
+					}
 				}
 			`}</style>
 		</div>

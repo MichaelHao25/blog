@@ -53,10 +53,10 @@ img
 
 /* 基本属性 */
 body
+	overflow-x hidden
+	overflow-y scroll
 	background #fff
 	color #333
-	overflow-y scroll
-	overflow-x hidden
 	font-weight 200
 
 /* 各浏览器的默认属性clear */
@@ -162,7 +162,11 @@ input[type=radio]::-ms-check, input[type=checkbox]::-ms-check
 
 .por
 	position relative
+
 .w1500
-	max-width 1500px
 	margin 0 auto
+	max-width 1500px
 	width 100%
+@media (max-width: 1600px)
+	.w1500
+		width 80%
