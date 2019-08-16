@@ -55,8 +55,9 @@ const Header = (props) => {
 						</Link>
 					</div>
 					<div className="links">
-						<Link href="/"><a className="blog">博文</a></Link>
+						<Link href="/blog"><a className="blog">博文</a></Link>
 						<Link href="/"><a className="dev">实验室</a></Link>
+						<Link href="/"><a className="works">作品展</a></Link>
 						<Link href="/"><a className="message">留言</a></Link>
 						<Link href="/"><a className="about">关于</a></Link>
 					</div>
@@ -116,7 +117,7 @@ const Header = (props) => {
 					border-radius: 1px;
 				}
 
-				@media(max-width:500px){
+				@media(max-width:700px){
 					.arrow.active{
 						top: 5px;
 						transform: translateY(0);
@@ -170,7 +171,7 @@ const Header = (props) => {
 					opacity: 0;
 					visibility: hidden;
 				}
-				@media(max-width:500px){
+				@media(max-width:700px){
 					.nav{
 						height: auto;
 					}
@@ -186,7 +187,7 @@ const Header = (props) => {
 					justify-content: space-between;
 					transition: 0.3s;
 				}
-				@media(max-width:500px){
+				@media(max-width:700px){
 					.w1500{
 						flex-direction:column;
 						width: 100%;
@@ -203,7 +204,7 @@ const Header = (props) => {
 					padding: 0 10px;
 					line-height: 56px;
 				}
-				@media(max-width:500px){
+				@media(max-width:700px){
 					.brand a{
 						display: inline-block;
 					}
@@ -221,7 +222,7 @@ const Header = (props) => {
 				.links a:hover{
 					color: #1890ff;
 				}
-				@media(max-width:500px){
+				@media(max-width:700px){
 					.links{
 						overflow-x: scroll;
 						-webkit-overflow-scrolling: touch;

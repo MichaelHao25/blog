@@ -4,87 +4,18 @@ import React, {
 } from 'react';
 import Link from 'next/link';
 import Layout from '../components/Layout';
-import '../css/reset.styl';
 // back = #1890ff
 // color = #333
 export default (props) => {
+	const [mask, setMask] = useState(false);	
 	return <Layout>
-		<InitPage />
-		<Home />
+		<InitPage setMask={setMask} />
+		<Home mask={mask} />
 		<Design />
 		<Drive />
-		<CopyRight />
 	</Layout>
 }
-const CopyRight = () => {
-	return (
-		<footer className="footer">
-			<div className="w1500">
-				<div className="list">
-					<div className="item">
-						<h3>关于Blog</h3>
-						<p>此Blog诞生的原因是想记录一些日常踩到的坑,也希望借此可以结交到其他的小伙伴啦,分享技术,一起进步.</p>
-					</div>
-					<div className="item">
-						<h3>友情链接</h3>
-						<div className="links">
-							<Link href="/"><a className="blog">博文</a></Link>
-							<Link href="/"><a className="dev">实验室</a></Link>
-							<Link href="/"><a className="message">留言</a></Link>
-							<Link href="/"><a className="about">关于</a></Link>
-						</div>
-					</div>
-				</div>
-				<p>Design & Code by Blue.use Mongodb + Next.js</p>
-			</div>
-			<style jsx>{`
-				.footer{
-					padding: 20px 0;
-					color: #ccc;
-					background: #333;
-					font-size: 14px;
-				}
-				.list{
-					display: flex;
-					justify-content: space-between;
-				}
-				h3{
-					font-size: 20px;
-					padding-bottom: 10px;
-					white-space: nowrap;
-				}
-				p{
-					padding-bottom: 10px;
-				}
-				.links{
-					display: flex;
-					flex-direction: column;
-				}
-				.links a{
-					line-height: 1.8;
-					transition: 0.3s;
-				}
-				.links a:hover{
-					color: #1890ff;
-				}
-				@media(max-width:500px){
-					.list{
-						flex-direction: column;
-					}
-					.w1500{
-						width: 100%;
-					}
-					.links{
-						align-items: flex-start;
-					}
-					.footer{
-						padding: 20px 15px;
-					}
-				}
-			`}</style>
-		</footer>
-	)
-}
+
 const Drive = () => {
 	return <div className="container">
 		<h3>Next.js强力驱动</h3>
@@ -115,6 +46,7 @@ const Drive = () => {
 				color: #fff;
 				text-align: left;
 				padding: 5px 10px;
+				border-radius: 5px;
 			}
 			a{
 				color: #1890ff;
@@ -332,9 +264,9 @@ const Design = () => {
 		</div>
 	)
 }
-const Home = () => {
+const Home = (props) => {	
 	return <section className="home">
-		<header className="header">
+		<header className={`header ${props.mask ? 'show' : ''}`}>
 			<div className="container">
 				{/* <div className="w1500"> */}
 				<h3 className='fz28'>你好!</h3>
@@ -350,6 +282,22 @@ const Home = () => {
 			</div>
 		</header>
 		<style jsx>{`
+			@keyframes circle_zoom {
+				0% {
+					opacity: 0;
+					-webkit-mask-size: 30%
+				}
+
+				40% {
+					opacity: .6;
+					-webkit-mask-size: 60%
+				}
+
+				to {
+					opacity: 1;
+					-webkit-mask-size: 300%
+				}
+			}
 			.header{
 				width: 100%;
 				background:url('../static/img/mask2.png'), url('../static/img/home.JPG') center center/cover no-repeat;
@@ -358,6 +306,15 @@ const Home = () => {
 				position: relative;
 				overflow: hidden;
 				transition: 0.3s background-position;
+				visibility: hidden;
+			}
+			.header.show{
+				-webkit-mask-image: url('../static/img/mask.png');
+				-webkit-mask-repeat: no-repeat;
+				-webkit-mask-position: center center;
+				-webkit-mask-size: 300%;
+				animation: circle_zoom 0.6s ease-in;
+				visibility: visible;
 			}
 			.header:after{
 				content: '';
@@ -428,7 +385,7 @@ const Home = () => {
 }
 
 let refInitPage = createRef();
-const InitPage = () => {
+const InitPage = (props) => {
 	const [action, setAction] = useState(false);
 	const [hide, setHide] = useState(false);
 	useEffect(() => {
@@ -437,8 +394,8 @@ const InitPage = () => {
 		}, 100);
 	}, [])
 	const transitionEnd = () => {
-		console.log('加载动画执行完毕');
 		setHide(true);
+		props.setMask(true);
 	}
 	return <section onTransitionEnd={transitionEnd} className={`initPage ${action ? 'action' : ''} ${hide ? 'hide' : ''}`}>
 		<style jsx>{`

@@ -38,3 +38,12 @@ font-family: -apple-system-font, sans-serif;
 
 PS:此方法并不能解决移动端font-size小于12px以下出现的不能垂直居中问题。可能还需要各位用其它方式来解决。
 # blog
+
+
+
+
+            {/*
+                flex布局会组织文本框的内容小于自身,所以需要设置min-with:0 来改善这个问题
+                min-width: 0;
+             */}
+             触发原因是: flex布局里面使用white-space nowrap 会造成问题
