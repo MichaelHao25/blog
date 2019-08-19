@@ -12,7 +12,7 @@ import Link from 'next/link';
 export default (props) => {
     // const router = useRouter();    
     return <Layout>
-        <BackGround />
+        <BackGround url={'../static/img/blog.jpg'} />
         <Container>
             <List />
             <Aside />
@@ -88,6 +88,7 @@ const Aside = () => {
                     display: block;
                     margin: 0 auto;
                     min-width: auto;
+                    max-width: none;
                 }
             }
         `}</style>
@@ -137,7 +138,7 @@ const UserInfo = () => {
 }
 const List = () => {
     const Item = () => {
-        return <Link href="/">
+        return <Link href="/blog/1">
             <a>
                 <div className="item">
                     <div className="img">
