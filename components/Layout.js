@@ -11,16 +11,18 @@ const Layout = props => {
 	return (
 		<>
 			<Header blur={blur} setBlur={setBlur} />
-			<div className={`${blur ? 'blur' : ''}`}>
+			<div className={`${blur ? 'blur' : ''} transition`}>
 				{props.children}
 				<Footer />
 			</div>
 			{/* background: rgba(255,255,255,0.6) */}
 			<style jsx>{`
 				.blur{
-					transition: 0.3s;
 					filter: blur(5px);
-					
+					transform: translate(0,80px)
+				}
+				.transition{
+					transition:  0.3s;
 				}
       		`}</style>
 		</>

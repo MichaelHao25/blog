@@ -384,7 +384,6 @@ const Home = (props) => {
 	</section>
 }
 
-let refInitPage = createRef();
 const InitPage = (props) => {
 	const [action, setAction] = useState(false);
 	const [hide, setHide] = useState(false);
